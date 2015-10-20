@@ -60,63 +60,31 @@ def printgraphs(a,b,c,d):
     data = [trace0, trace1]
     unique_url = py.plot(data, filename = 'basic-line')
 
-#Performs bubble sort and times the operation
-def callBubble():
-    grapharrayA, grapharrayB, arr = [], [], []
-    for i in range(0,n-1):
-        arr = generaterandomarray(sizearray[i], 10000)
-        start_time = time.time()
-        bubblesort(arr)
-        total_time = (start_time - time.time())
-        grapharrayA.append(sizearray[i])
-        grapharrayB.append(round(abs(total_time), 5))
-    return grapharrayA, grapharrayB
-
-#Performs merge sort and times the operation
-def callMerge():
-    grapharrayC, grapharrayD, arr2 = [], [], []
-    for i in range(0,n-1):
-        arr2 = generaterandomarray(sizearray[i], 10000)
-        start_time2 = time.time()
-        mergesort(arr2)
-        total_time2 = (start_time2 - time.time())
-        grapharrayC.append(sizearray[i])
-        grapharrayD.append(round(abs(total_time2), 5))
-    return grapharrayC, grapharrayD
-
 grapharraya, grapharrayb, grapharrayc, grapharrayd, arr = [], [], [], [], []
-bubbletime, mergetime = 0,0
-repeat = 50
-for i in range(0,n-1):
-    arr = generaterandomarray(sizearray[i], 10000)
-    arr2 = arr
+totalbubbletime, totalmergetime = 0,0     #running total time
+repeat = 50                     #how times to repeat for an average
+for i in range(0,n-1):          #for each element in sizearray
+    arr = generaterandomarray(sizearray[i], 10000) #generate random array of that size
+    arr2 = arr                  #assign it to another array for the second sorting algorithm
     for j in (0,repeat):
         startbubble_time = time.time()
         bubblesort(arr)
-        totalbubble_time = (startbubble_time - time.time())
-        bubbletime += totalbubble_time
+        bubbletime = (startbubble_time - time.time())
+        totalbubbletime += bubbletime
 
         startmerge_time = time.time()
         mergesort(arr2)
-        totalmerge_time = (startmerge_time - time.time())
-        mergetime += totalmerge_time
+        mergetime = (startmerge_time - time.time())
+        totalmergetime += mergetime
 
     grapharraya.append(sizearray[i])
-    grapharrayb.append(abs(bubbletime/repeat))
+    grapharrayb.append(abs(totalbubbletime/repeat))
     grapharrayc.append(sizearray[i])
-    grapharrayd.append(abs(mergetime/repeat))
+    grapharrayd.append(abs(totalmergetime/repeat))
 
 
-
-#grapha, graphb = callBubble()
-#graphc, graphd = callMerge()
-#printgraphs(grapha, graphb, graphc, graphd)
 print printgraphs(grapharraya, grapharrayb, grapharrayc, grapharrayd)
 
-#print grapha #x axis is the size
-#print graphb #y axis is time
-#print graphc #x axis is the size
-#print graphd #y axis is time
 
 
 
