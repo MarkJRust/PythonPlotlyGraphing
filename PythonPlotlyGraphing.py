@@ -84,14 +84,39 @@ def callMerge():
         grapharrayD.append(round(abs(total_time2), 5))
     return grapharrayC, grapharrayD
 
-grapha, graphb = callBubble()
-graphc, graphd = callMerge()
-printgraphs(grapha, graphb, graphc, graphd)
+grapharraya, grapharrayb, grapharrayc, grapharrayd, arr = [], [], [], [], []
+bubbletime, mergetime = 0,0
+repeat = 50
+for i in range(0,n-1):
+    arr = generaterandomarray(sizearray[i], 10000)
+    arr2 = arr
+    for j in (0,repeat):
+        startbubble_time = time.time()
+        bubblesort(arr)
+        totalbubble_time = (startbubble_time - time.time())
+        bubbletime += totalbubble_time
 
-print grapha #x axis is the size
-print graphb #y axis is time
-print graphc #x axis is the size
-print graphd #y axis is time
+        startmerge_time = time.time()
+        mergesort(arr2)
+        totalmerge_time = (startmerge_time - time.time())
+        mergetime += totalmerge_time
+
+    grapharraya.append(sizearray[i])
+    grapharrayb.append(abs(bubbletime/repeat))
+    grapharrayc.append(sizearray[i])
+    grapharrayd.append(abs(mergetime/repeat))
+
+
+
+#grapha, graphb = callBubble()
+#graphc, graphd = callMerge()
+#printgraphs(grapha, graphb, graphc, graphd)
+print printgraphs(grapharraya, grapharrayb, grapharrayc, grapharrayd)
+
+#print grapha #x axis is the size
+#print graphb #y axis is time
+#print graphc #x axis is the size
+#print graphd #y axis is time
 
 
 
