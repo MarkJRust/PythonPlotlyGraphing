@@ -70,9 +70,9 @@ grapharraya, grapharrayb, grapharrayc, grapharrayd, arr = [], [], [], [], []
 totalbubbletime, totalmergetime = 0,0       #running total time
 repeat = 50                                 #how times to repeat for an average
 for i in range(0,n):                        #for each element in sizearray
-    arr = generaterandomarray(sizearray[i], 100000) #generate random array of that size
-    arr2 = arr                              #assign it to another array for the second sorting algorithm
     for j in (0,repeat):
+        arr = generaterandomarray(sizearray[i], 100000) #generate random array of that size
+        arr2 = arr                          #assign it to another array for the second sorting algorithm
         startbubble_time = time.time()
         bubblesort(arr)
         bubbletime = (startbubble_time - time.time())
