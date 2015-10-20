@@ -6,7 +6,7 @@ import random
 #This program takes randomly generated arrays, sorts them with bubble and merge sort, times the sorting process, and graphs it
 
 #enter random array lengths here to be sorted and timed
-sizearray = [5, 10, 15, 25, 35, 45, 50, 75, 100, 250, 500, 750, 1000, 1500]
+sizearray = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000]
 n = len(sizearray)
 
 #Generate random array of (size) from zero to (numhigh)
@@ -60,12 +60,18 @@ def printgraphs(a,b,c,d):
     data = [trace0, trace1]
     unique_url = py.plot(data, filename = 'basic-line')
 
+#Use this function to only print one of the data sets to Ploty
+def onegraph(a,b):
+    trace0 = go.Scatter(x=a, y=b)
+    data = [trace0]
+    unique_url = py.plot(data, filename = 'basic-line')
+
 grapharraya, grapharrayb, grapharrayc, grapharrayd, arr = [], [], [], [], []
-totalbubbletime, totalmergetime = 0,0     #running total time
-repeat = 50                     #how times to repeat for an average
-for i in range(0,n-1):          #for each element in sizearray
-    arr = generaterandomarray(sizearray[i], 10000) #generate random array of that size
-    arr2 = arr                  #assign it to another array for the second sorting algorithm
+totalbubbletime, totalmergetime = 0,0       #running total time
+repeat = 50                                 #how times to repeat for an average
+for i in range(0,n):                        #for each element in sizearray
+    arr = generaterandomarray(sizearray[i], 100000) #generate random array of that size
+    arr2 = arr                              #assign it to another array for the second sorting algorithm
     for j in (0,repeat):
         startbubble_time = time.time()
         bubblesort(arr)
@@ -82,9 +88,8 @@ for i in range(0,n-1):          #for each element in sizearray
     grapharrayc.append(sizearray[i])
     grapharrayd.append(abs(totalmergetime/repeat))
 
-
 print printgraphs(grapharraya, grapharrayb, grapharrayc, grapharrayd)
-
+#print onegraph(grapharrayc, grapharrayd)
 
 
 
